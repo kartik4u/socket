@@ -5,8 +5,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-//const port = "0.0.0.0";
-//process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 var allData = [];
 //require('./src/config/database')
 //const user_routes = require('./src/user/users.routes');
@@ -45,5 +44,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(port, () => {
-  console.log( `Server running at http://localhost:${port}/`);
+  //console.log( `Server running at http://localhost:${port}/`);
 });
