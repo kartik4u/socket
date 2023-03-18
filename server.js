@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
   socket.on('send_message',(data)=>{
     console.log("received message in server side",data);
     //allData.push(data);
-    io.emit('received_message',data[0])
+    io.emit('received_message',data)
   })
 
 
