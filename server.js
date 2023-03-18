@@ -5,7 +5,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-const port = "0.0.0.0";
+//const port = "0.0.0.0";
 //process.env.PORT || 3000;
 var allData = [];
 //require('./src/config/database')
