@@ -17,16 +17,26 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
-
+var allClients=[];
 //app.use('/User', user_routes)
 io.on('connection', (socket) => {
   //socket.emit('create', 'room1');
 
   console.log('a user connected');
-      socket.on('create', function(room) {
-        console.log("room",room);
-         socket.join(room);
+      socket.on('create', function(data) {
+        allClients.push(data.user);
+        io.sockets.emit('online_users',allClients);
+
+        console.log("room",data.room);
+         socket.join(data.room);
       });
+
+
+      
+  socket.on('online_users',(clients)=>{
+    console.log("clients",clients);
+
+  })
 
       //allClients.push(socket.id);
       //setOnline(allClients.length);
@@ -63,6 +73,12 @@ io.on('connection', (socket) => {
     // var i = allClients.indexOf(socket.id);
     // allClients.splice(i, 1);
     // io.emit("online", allClients);
+    if(allClients.length>0){
+      var index = allClients.findIndex(o => o.socket_id == socket.id);
+      allClients.splice(index, 1);
+
+      io.sockets.emit('online_users',allClients);
+    }
 
     console.log('user disconnected');
   });
