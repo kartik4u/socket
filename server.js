@@ -24,8 +24,8 @@ io.on('connection', (socket) => {
 
   console.log('a user connected');
       socket.on('create', function(data) {
-        allClients.push(data.user);
-        io.sockets.emit('online_users',allClients);
+     //   allClients.push(data.user);
+       // io.sockets.emit('online_users',allClients);
 
         console.log("room",data.room);
          socket.join(data.room);
@@ -33,10 +33,10 @@ io.on('connection', (socket) => {
 
 
       
-  socket.on('online_users',(clients)=>{
-    console.log("clients",clients);
+  // socket.on('online_users',(clients)=>{
+  //   console.log("clients",clients);
 
-  })
+  // })
 
 
   // socket.on('disconnect',(socket_id)=>{
