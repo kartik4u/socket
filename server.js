@@ -39,14 +39,14 @@ io.on('connection', (socket) => {
   })
 
 
-  socket.on('disconnect',(socket_id)=>{
-  //    console.log("clients",clients);
-    if(allClients.length>0){
-      var index = allClients.findIndex(o => o.socket_id == socket_id);
-      allClients.splice(index, 1);
-    }
-    io.sockets.emit('online_users',allClients);
-  })
+  // socket.on('disconnect',(socket_id)=>{
+  // //    console.log("clients",clients);
+  //   if(allClients.length>0){
+  //     var index = allClients.findIndex(o => o.socket_id == socket_id);
+  //     allClients.splice(index, 1);
+  //   }
+  //   io.sockets.emit('online_users',allClients);
+  // })
 
 
   socket.on('clear_clients',()=>{
@@ -78,6 +78,16 @@ io.on('connection', (socket) => {
 
   })
 
+  socket.on('push_online_users',(data)=>{
+   // console.log("received message in server side",data);
+    //allData.push(data);
+    //io.emit('received_message',data[0])
+    io.sockets.emit('online_users',data);
+
+  })
+
+  
+
 
   // socket.on('update_message',(data)=>{
   //   //console.log("received message in server side",data);
@@ -90,12 +100,12 @@ io.on('connection', (socket) => {
     // var i = allClients.indexOf(socket.id);
     // allClients.splice(i, 1);
     // io.emit("online", allClients);
-    if(allClients.length>0){
-      var index = allClients.findIndex(o => o.socket_id == socket.id);
-      allClients.splice(index, 1);
+    // if(allClients.length>0){
+    //   var index = allClients.findIndex(o => o.socket_id == socket.id);
+    //   allClients.splice(index, 1);
 
-    }
-    io.sockets.emit('online_users',allClients);
+    // }
+    // io.sockets.emit('online_users',allClients);
 
     console.log('user disconnected');
   });
