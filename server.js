@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
   //   io.emit('received_message',allData)
   // })
 
-  socket.on('disconnect', (socket) => {    
+  socket.on('disconnect_room', (socket) => {    
     // var i = allClients.indexOf(socket.id);
     // allClients.splice(i, 1);
     // io.emit("online", allClients);
