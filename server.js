@@ -38,6 +38,23 @@ io.on('connection', (socket) => {
 
   })
 
+
+  socket.on('disconnect',(socket_id)=>{
+  //    console.log("clients",clients);
+    if(allClients.length>0){
+      var index = allClients.findIndex(o => o.socket_id == socket_id);
+      allClients.splice(index, 1);
+    }
+    io.sockets.emit('online_users',allClients);
+  })
+
+
+  socket.on('clear_clients',()=>{
+    //    console.log("clients",clients);
+      allClients =[];
+      io.sockets.emit('clear_clients',allClients);
+  })
+
       //allClients.push(socket.id);
       //setOnline(allClients.length);
       // socket.once('disconnect', function() {
@@ -77,8 +94,8 @@ io.on('connection', (socket) => {
       var index = allClients.findIndex(o => o.socket_id == socket.id);
       allClients.splice(index, 1);
 
-      io.sockets.emit('online_users',allClients);
     }
+    io.sockets.emit('online_users',allClients);
 
     console.log('user disconnected');
   });
