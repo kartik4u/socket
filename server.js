@@ -23,13 +23,13 @@ io.on('connection', (socket) => {
   //socket.emit('create', 'room1');
 
   console.log('a user connected');
-      socket.on('create', function(data) {
-     //   allClients.push(data.user);
-       // io.sockets.emit('online_users',allClients);
+    //  socket.on('create', function(data) {
+    //     allClients.push(data.user);
+    //    // io.sockets.emit('online_users',allClients);
 
-        console.log("room",data.room);
-         socket.join(data.room);
-      });
+    //     //console.log("room",data.room);
+    //     // socket.join(data.room);
+    //   });
 
 
       
@@ -73,8 +73,8 @@ io.on('connection', (socket) => {
   socket.on('send_message',(data)=>{
     console.log("received message in server side",data);
     //allData.push(data);
-    //io.emit('received_message',data[0])
-    io.sockets.in(data.room).emit('received_message',data);
+    io.emit('received_message',data)
+    //io.sockets.in(data.room).emit('received_message',data);
 
   })
 
